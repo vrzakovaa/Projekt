@@ -1,225 +1,161 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Authentication.ExtendedProtection;
 
-namespace _2_projekt_miny
+namespace _1_projekt_lode
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            bool opakovat = true;
-            while (opakovat == true)
+            char[,] pole = new char[11, 11];
+            
+            vyplnPole(pole);
+            lod(pole);
+            cislovani(pole);
+           
+
+            int pocet = 0;
+            int pocetTahu = 0;
+            char[,] pole2 = new char[11, 11];
+
+            while (pocet < 3)
             {
-                string[,] pole = new string[11, 11];
-                string[,] pole2 = new string[11, 11];
-                vyplnPole(pole);
-                miny(pole); // 10
-                cislovani(pole);
-                int pocet = 0;
+
                 int tahX;
                 int tahY;
-                int pocetMin = 10;
 
-                while (pocet < 90 || pocetMin >= 0)
+                //zadání tahu
+
+                Console.Write("Zadej sloupec: ");
+
+                while (!int.TryParse(Console.ReadLine(), out tahX) || tahX < 1 || tahX > 10)
                 {
-                    //pokud chce uživatel označit políčko s minou, napíše "chci" 
-                    while (Console.ReadLine().ToUpper() == "CHCI")
-                    {
-                        Console.WriteLine("Chceš označit políčko");
-
-                        //zadání sloupce
-                        Console.WriteLine("Zadej sloupec: ");
-                        while (!int.TryParse(Console.ReadLine(), out tahX) || tahX < 1 || tahX > 11)
-                        {
-                            Console.WriteLine("Neplatný vstup. Zadej platný sloupec (1-10): ");
-                        }
-
-                        //zadání řádku
-                        Console.WriteLine("Zadej řádek: ");
-                        while (!int.TryParse(Console.ReadLine(), out tahY) || tahY < 1 || tahY > 11)
-                        {
-                            Console.WriteLine("Neplatný vstup. Zadej platný řádek (1-10): ");
-                        }
-
-                        //odečtení miny
-                        if (pole[tahY, tahX] == "*")
-                        {
-                            pocetMin-- ;
-                        }
-
-                        if (pocetMin == 0)
-                        {
-                            break;
-                        }
-                        Console.Clear();
-
-                        //označní miny znakem X
-                        pole[tahY, tahX] = "X";
-                        vyplnPole2(pole2);
-                        cislovani(pole);
-                        Console.WriteLine("Pokračuj dále");
-                    }
-                    
-                    //výhra
-                    if (pocet == 90 || pocetMin ==0)
-                    {
-                        Console.WriteLine("Vyhrál jsi, nestoupl jsi ani na jednu minu");
-                        break;
-                    }
-
-                    //zadání sloupce
-                    Console.WriteLine("Zadej sloupec: ");
-
-                    while (!int.TryParse(Console.ReadLine(), out tahX) || tahX < 1 || tahX > 10)
-                    {
-                        Console.WriteLine("Neplatný vstup. Zadej platný sloupec (1-10): ");
-                    }
-
-                    //zadání řádku
-                    Console.WriteLine("Zadej řádek: ");
-                    while (!int.TryParse(Console.ReadLine(), out tahY) || tahY < 1 || tahY > 10)
-                    {
-                        Console.WriteLine("Neplatný vstup. Zadej platný řádek (1-10): ");
-                    }
-
-                    //stoupnutí na minu
-                    if (pole[tahY, tahX] == "*")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Stoupl jsi na minu, hra končí!");
-                        break;
-                    }
-                    Console.Clear();
-
-                    //nový výpis
-                    pocet++;
-                    strela(pole, tahX, tahY);
-                    vyplnPole2(pole2);
-                    cislovani(pole);
-                    
+                    Console.WriteLine("Neplatný vstup. Zadej platný sloupec (1-10): ");
                 }
-                Console.ForegroundColor = ConsoleColor.White;
-                //hra znovu?
-                Console.WriteLine("Chceš hrát znovu? A/N");
-                string vyber = Console.ReadLine().ToUpper();
-                if (vyber == "A")
+
+                Console.Write("Zadej řádek: ");
+
+                while (!int.TryParse(Console.ReadLine(), out tahY) || tahY < 1 || tahY > 10)
                 {
-                    opakovat = true;
+                    Console.WriteLine("Neplatný vstup. Zadej platný řádek (1-10): ");
+                }
+
+                // je loď trefena?
+
+                if (pole[tahY, tahX] == '#')
+                {
+                    string text = "trefena";
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    strela(text, tahX, tahY, pole);
+                    pocetTahu++;
+                    pocet++;
+
                 }
                 else
                 {
-                    opakovat = false;
-                }
-                Console.Clear();
-            }
-        }
+                    string text2 = "jsi minul";
+                    pocetTahu++;
+                    strela(text2, tahX, tahY, pole);
 
-        //vytvoření hracího pole
-        static void vyplnPole(string[,] pole)
+                }
+                vyplnPole2(pole2);
+                cislovani(pole);
+
+
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
+
+            if(pocet == 3)
+            {
+                Console.WriteLine("Loď potopena, potřeboval jsi na to " + pocetTahu + " tahů");
+            }
+
+        }
+        static void vyplnPole(char[,] pole)
         {
             for (int i = 1; i < pole.GetLength(0); i++)
             {
 
                 for (int j = 1; j < pole.GetLength(1); j++)
                 {
-                    pole[i, j] = "■";
+                    pole[i, j] = '~';
                 }
             }
         }
-
-        static void vyplnPole2(string[,] pole)
+        static void lod(char[,] pole)
         {
-            for (int i = 1; i < pole.GetLength(0); i++)
-            {
+            int sloupec;
+            int radek;
 
-                for (int j = 1; j < pole.GetLength(1); j++)
-                {
-                    pole[i, j] = "■";
-                }
-            }
+            Random random = new Random();
+
+            radek = random.Next(1, pole.GetLength(0));
+            sloupec = random.Next(1, pole.GetLength(1) - 3);
+
+            pole[radek, sloupec] = '#';
+            pole[radek, sloupec + 1] = '#';
+            pole[radek, sloupec + 2] = '#';
+
         }
 
-        //čílování pole
-        static void cislovani(string[,] pole)
+        static void cislovani(char[,] pole)
         {
-            // Sloupce
-            Console.Write("   ");
+            // Očíslování sloupců
+            Console.Write("  ");
             for (int i = 1; i < pole.GetLength(1); i++)
             {
                 Console.Write($"{i} ");
             }
             Console.WriteLine();
 
-            // Řádky
+            // Očíslování řádků
             for (int i = 1; i < pole.GetLength(0); i++)
             {
-                if (i < 10)
-                {
-                    Console.Write($"{i}  ");
-                } else
-                {
-                    Console.Write($"{i} ");
-                }
+                Console.Write($"{i} ");
                 for (int j = 1; j < pole.GetLength(1); j++)
                 {
-                    string symbol = " ";
+                    // skrytí lodě
 
-                    //skrytí min
-                    if (pole[i, j] == "*")
-                    {
-                        symbol = "■";
+                    char symbol = ' ';
+                    
+                  if (pole[i,j] == '#')
+                  {
+                        symbol = '~';
                         Console.Write(symbol + " ");
-                    }
-                    else
-                    { 
+                  }
+                  else
+                  {
                         Console.Write(pole[i, j] + " ");
-                    }
+                  }
+
                 }
                 Console.WriteLine();
             }
+
         }
-            //náhodné umístění min
-            static void miny(string[,] pole)
+       
+       static void vyplnPole2(char[,] pole2)
+        {
+            
+            for (int i = 1; i < pole2.GetLength(0); i++)
             {
-                Random random = new Random();
-                for (int k = 0; k < 10; k++)
-                {
-                    int sloupec = random.Next(1, 11);
-                    int radek = random.Next(1, 11);
-                 // ošetření, že nebude více min na sobě
-                if (pole[sloupec, radek] == "*")
-                {
-                    sloupec = random.Next(1, 11);
-                    radek = random.Next(1, 11);
-                }
 
-                    pole[sloupec, radek] = "*";
+                for (int j = 1; j < pole2.GetLength(1); j++)
+                {
+                    pole2[i, j] = '~';
                 }
-
             }
+        }
 
-            static void strela(string[,] pole, int tahX, int tahY)
-            {
-                int pocet = 0;
-                // Kontrola okolních polí
-                for (int i = -1; i <= 1; i++)
-                {
-                    for (int j = -1; j <= 1; j++)
-                    {
-                        int radek = tahY + i;
-                        int sloupec = tahX + j;
-
-                    //počítání min v okolí
-                        if (radek >= 0 && radek < pole.GetLength(1) && radek >= 0 && sloupec < pole.GetLength(0))
-                        {
-                            if (pole[radek, sloupec] == "*" || pole[radek, sloupec] == "X")
-                                pocet++;
-                        }
-
-                    }
-
-                }
-                //vložení počtu min v okolí do pole
-                pole[tahY, tahX] = pocet.ToString();
-            }
+       
+        static void strela(string text, int tahX, int tahY, char[,] pole)
+        {
+            Console.WriteLine("Loď " + text);
+            pole[tahY, tahX] = 'X';
+            
+        }
+        
     }
 }
