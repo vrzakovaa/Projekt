@@ -27,17 +27,23 @@ namespace _2_projekt_miny
                         Console.WriteLine("Chceš označit políčko");
 
                         //zadání sloupce
-                        Console.WriteLine("Zadej sloupec: ");
+                        Console.Write("Zadej sloupec: ");
                         while (!int.TryParse(Console.ReadLine(), out tahX) || tahX < 1 || tahX > 11)
                         {
+                            Console.Clear();
+                            vypis(pole, pole2);
                             Console.WriteLine("Neplatný vstup. Zadej platný sloupec (1-10): ");
+                            
                         }
 
                         //zadání řádku
-                        Console.WriteLine("Zadej řádek: ");
+                        Console.Write("Zadej řádek: ");
                         while (!int.TryParse(Console.ReadLine(), out tahY) || tahY < 1 || tahY > 11)
                         {
+                            Console.Clear();
+                            vypis(pole, pole2);
                             Console.WriteLine("Neplatný vstup. Zadej platný řádek (1-10): ");
+                            
                         }
 
                         //odečtení miny
@@ -54,8 +60,7 @@ namespace _2_projekt_miny
 
                         //označní miny znakem X
                         pole[tahY, tahX] = "X";
-                        vyplnPole2(pole2);
-                        cislovani(pole);
+                        vypis(pole, pole2);
                         Console.WriteLine("Pokračuj dále");
                     }
                     
@@ -67,17 +72,21 @@ namespace _2_projekt_miny
                     }
 
                     //zadání sloupce
-                    Console.WriteLine("Zadej sloupec: ");
+                    Console.Write("Zadej sloupec: ");
 
                     while (!int.TryParse(Console.ReadLine(), out tahX) || tahX < 1 || tahX > 10)
                     {
+                        Console.Clear();
+                        vypis(pole, pole2);
                         Console.WriteLine("Neplatný vstup. Zadej platný sloupec (1-10): ");
                     }
 
                     //zadání řádku
-                    Console.WriteLine("Zadej řádek: ");
+                    Console.Write("Zadej řádek: ");
                     while (!int.TryParse(Console.ReadLine(), out tahY) || tahY < 1 || tahY > 10)
                     {
+                        Console.Clear();
+                        vypis(pole, pole2);
                         Console.WriteLine("Neplatný vstup. Zadej platný řádek (1-10): ");
                     }
 
@@ -85,6 +94,7 @@ namespace _2_projekt_miny
                     if (pole[tahY, tahX] == "*")
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine();
                         Console.WriteLine("Stoupl jsi na minu, hra končí!");
                         break;
                     }
@@ -93,15 +103,14 @@ namespace _2_projekt_miny
                     //nový výpis
                     pocet++;
                     strela(pole, tahX, tahY);
-                    vyplnPole2(pole2);
-                    cislovani(pole);
+                    vypis(pole, pole2);
                     
                 }
                 Console.ForegroundColor = ConsoleColor.White;
                 //hra znovu?
-                Console.WriteLine("Chceš hrát znovu? A/N");
+                Console.WriteLine("Chceš hrát znovu? Yes/No");
                 string vyber = Console.ReadLine().ToUpper();
-                if (vyber == "A")
+                if (vyber == "YES")
                 {
                     opakovat = true;
                 }
@@ -221,5 +230,11 @@ namespace _2_projekt_miny
                 //vložení počtu min v okolí do pole
                 pole[tahY, tahX] = pocet.ToString();
             }
+
+        static void vypis(string[,] pole, string[,] pole2)
+        {
+            vyplnPole2(pole2);
+            cislovani(pole);
+        }
     }
 }
