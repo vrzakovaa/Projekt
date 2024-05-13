@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4OmDfsl+slK9fmJTJY/BhigW2FRRhHX1zZ8tIWiQ59KevTbapQ1P4eWCkf7pHqGPxuVdbIZ9n8S5I9vPwv4Mqw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Vrzáková Adéla\\source\\repos\\prog\\pujcovna_auta\\pujcovna_auta.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Vrzáková Adéla\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

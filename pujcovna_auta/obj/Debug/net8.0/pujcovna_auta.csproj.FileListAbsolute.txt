@@ -1,0 +1,17 @@
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\bin\Debug\net8.0\pujcovna_auta.exe
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\bin\Debug\net8.0\pujcovna_auta.deps.json
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\bin\Debug\net8.0\pujcovna_auta.runtimeconfig.json
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\bin\Debug\net8.0\pujcovna_auta.dll
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\bin\Debug\net8.0\pujcovna_auta.pdb
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.AssemblyInfoInputs.cache
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.AssemblyInfo.cs
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.csproj.CoreCompileInputs.cache
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.dll
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\refint\pujcovna_auta.dll
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.pdb
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.genruntimeconfig.cache
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\ref\pujcovna_auta.dll
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna_auta.csproj.AssemblyReference.cache
+C:\Users\Vrzáková Adéla\source\repos\prog\pujcovna_auta\obj\Debug\net8.0\pujcovna.C8758456.Up2Date
